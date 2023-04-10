@@ -12,17 +12,19 @@
 namespace Xsoft\MasonTag\Api\Serializers;
 
 use Flarum\Api\Serializer\AbstractSerializer;
-use Xsoft\MasonTag\Answer;
+use Xsoft\MasonTag\ByTag;
+use Xsoft\MasonTag\Repositories\FieldRepository;
+use Tobscure\JsonApi\Collection;
 use Tobscure\JsonApi\Relationship;
 
-class AnswerSerializer extends AbstractSerializer
+class ByTagSerializer extends AbstractSerializer
 {
-    protected $type = 'mason-answers';
+    protected $type = 'mason-bytags';
 
     /**
      * Get the default set of serialized attributes for a model.
      *
-     * @param Answer|array $model
+     * @param ByTag|array $model
      *
      * @return array
      */
@@ -32,16 +34,23 @@ class AnswerSerializer extends AbstractSerializer
     }
 
     /**
-     * @param $model
+     * @param ByTag $model
      *
      * @return Relationship
      */
-    public function field($model)
+    public function allFields($model)
     {
-        return $this->hasOne(
-            $model,
-            FieldSerializer::class,
-            'field'
-        );
+        $actor = $this->getActor();
+
+        if (!$actor || !$actor->isAdmin()) {
+            return null;
+        }
+
+        /**
+         * @var $fields FieldRepository
+         */
+        $fields = resolve(FieldRepository::class);
+
+        return new Relationship(new Collection($fields->all($model), resolve(FieldSerializer::class)));
     }
 }

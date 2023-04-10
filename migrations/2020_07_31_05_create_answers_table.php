@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of fof/mason.
+ * This file is part of xsoft/mason-tag.
  *
  * Copyright (c) FriendsOfFlarum.
  *

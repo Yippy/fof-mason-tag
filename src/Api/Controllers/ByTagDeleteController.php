@@ -13,17 +13,17 @@ namespace Xsoft\MasonTag\Api\Controllers;
 
 use Flarum\Api\Controller\AbstractDeleteController;
 use Flarum\Http\RequestUtil;
-use Xsoft\MasonTag\Repositories\FieldRepository;
+use Xsoft\MasonTag\Repositories\ByTagRepository;
 use Illuminate\Support\Arr;
 use Psr\Http\Message\ServerRequestInterface;
 
-class FieldDeleteController extends AbstractDeleteController
+class ByTagDeleteController extends AbstractDeleteController
 {
-    protected $fields;
+    protected $bytags;
 
-    public function __construct(FieldRepository $fields)
+    public function __construct(ByTagRepository $bytags)
     {
-        $this->fields = $fields;
+        $this->bytags = $bytags;
     }
 
     protected function delete(ServerRequestInterface $request)
@@ -32,8 +32,8 @@ class FieldDeleteController extends AbstractDeleteController
 
         $id = Arr::get($request->getQueryParams(), 'id');
 
-        $field = $this->fields->findOrFail($id);
+        $field = $this->bytags->findOrFail($id);
 
-        $this->fields->delete($field);
+        $this->bytags->delete($field);
     }
 }

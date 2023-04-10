@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of fof/mason.
+ * This file is part of xsoft/mason-tag.
  *
  * Copyright (c) FriendsOfFlarum.
  *
@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace FoF\Mason\Validators;
+namespace Xsoft\MasonTag\Validators;
 
 use Flarum\Foundation\AbstractValidator;
-use FoF\Mason\Field;
+use Xsoft\MasonTag\Field;
 
 class UserAnswerValidator extends AbstractValidator
 {

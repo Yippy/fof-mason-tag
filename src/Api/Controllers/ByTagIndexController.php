@@ -13,30 +13,30 @@ namespace Xsoft\MasonTag\Api\Controllers;
 
 use Flarum\Api\Controller\AbstractListController;
 use Flarum\Http\RequestUtil;
-use Xsoft\MasonTag\Api\Serializers\FieldSerializer;
-use Xsoft\MasonTag\Repositories\FieldRepository;
+use Xsoft\MasonTag\Api\Serializers\ByTagSerializer;
+use Xsoft\MasonTag\Repositories\ByTagRepository;
 use Psr\Http\Message\ServerRequestInterface;
 use Tobscure\JsonApi\Document;
 
-class FieldIndexController extends AbstractListController
+class ByTagIndexController extends AbstractListController
 {
-    public $serializer = FieldSerializer::class;
+    public $serializer = ByTagSerializer::class;
 
-    public $include = [
-        'allAnswers',
-    ];
+    // public $include = [
+    //     'allAnswers',
+    // ];
 
-    protected $fields;
+    protected $bytags;
 
-    public function __construct(FieldRepository $fields)
+    public function __construct(ByTagRepository $bytags)
     {
-        $this->fields = $fields;
+        $this->bytags = $bytags;
     }
 
     protected function data(ServerRequestInterface $request, Document $document)
     {
         RequestUtil::getActor($request)->assertAdmin();
 
-        return $this->fields->all();
+        return $this->bytags->all();
     }
 }

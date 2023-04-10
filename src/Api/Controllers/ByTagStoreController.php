@@ -13,25 +13,25 @@ namespace Xsoft\MasonTag\Api\Controllers;
 
 use Flarum\Api\Controller\AbstractCreateController;
 use Flarum\Http\RequestUtil;
-use Xsoft\MasonTag\Api\Serializers\FieldSerializer;
-use Xsoft\MasonTag\Repositories\FieldRepository;
+use Xsoft\MasonTag\Api\Serializers\ByTagSerializer;
+use Xsoft\MasonTag\Repositories\ByTagRepository;
 use Illuminate\Support\Arr;
 use Psr\Http\Message\ServerRequestInterface;
 use Tobscure\JsonApi\Document;
 
-class FieldStoreController extends AbstractCreateController
+class ByTagStoreController extends AbstractCreateController
 {
-    public $serializer = FieldSerializer::class;
+    public $serializer = ByTagSerializer::class;
 
-    public $include = [
-        'allAnswers',
-    ];
+    // public $include = [
+    //     'allAnswers',
+    // ];
 
-    protected $fields;
+    protected $bytags;
 
-    public function __construct(FieldRepository $fields)
+    public function __construct(ByTagRepository $bytags)
     {
-        $this->fields = $fields;
+        $this->bytags = $bytags;
     }
 
     protected function data(ServerRequestInterface $request, Document $document)
@@ -40,6 +40,6 @@ class FieldStoreController extends AbstractCreateController
 
         $attributes = Arr::get($request->getParsedBody(), 'data.attributes', []);
 
-        return $this->fields->store($attributes);
+        return $this->bytags->store($attributes);
     }
 }

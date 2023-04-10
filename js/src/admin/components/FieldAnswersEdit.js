@@ -49,7 +49,7 @@ export default class FieldAnswersEdit extends Component {
 
     view() {
         if (!this.field.exists) {
-            return <div>{app.translator.trans('fof-mason.admin.fields.save-field-for-answers')}</div>;
+            return <div>{app.translator.trans('xsoft-mason-tag.admin.fields.save-field-for-answers')}</div>;
         }
 
         let suggestedAnswers = [];
@@ -87,7 +87,7 @@ export default class FieldAnswersEdit extends Component {
                             }}
                         >
                             <div className="Mason-Box-Header-Title">
-                                {app.translator.trans('fof-mason.admin.buttons.show-user-answers', {
+                                {app.translator.trans('xsoft-mason-tag.admin.buttons.show-user-answers', {
                                     count: userAnswers.length,
                                 })}
                             </div>
@@ -107,20 +107,20 @@ export default class FieldAnswersEdit extends Component {
             </div>,
             <div className="Form-group">
                 <label>
-                    {app.translator.trans('fof-mason.admin.fields.new-answer')}
+                    {app.translator.trans('xsoft-mason-tag.admin.fields.new-answer')}
                     <input
                         className="FormControl"
                         value={this.new_content}
                         oninput={(e) => {
                             this.new_content = e.target.value;
                         }}
-                        placeholder={app.translator.trans('fof-mason.admin.fields.new-answer-placeholder')}
+                        placeholder={app.translator.trans('xsoft-mason-tag.admin.fields.new-answer-placeholder')}
                     />
                 </label>
             </div>,
             <div className="Form-group">
                 <Button className="Button Button--primary" loading={this.processing} disabled={!this.new_content} onclick={this.saveField.bind(this)}>
-                    {app.translator.trans('fof-mason.admin.buttons.add-answer')}
+                    {app.translator.trans('xsoft-mason-tag.admin.buttons.add-answer')}
                 </Button>
             </div>,
         ];

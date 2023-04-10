@@ -11,78 +11,78 @@
 
 namespace Xsoft\MasonTag\Repositories;
 
-use Xsoft\MasonTag\Field;
-use Xsoft\MasonTag\Validators\FieldValidator;
+use Xsoft\MasonTag\ByTag;
+use Xsoft\MasonTag\Validators\ByTagValidator;
 use Illuminate\Cache\Repository;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
-class FieldRepository
+class ByTagRepository
 {
-    protected $field;
+    protected $bytag;
     protected $validator;
     protected $cache;
 
-    public function __construct(Field $field, FieldValidator $validator, Repository $cache)
+    public function __construct(ByTag $bytag, ByTagValidator $validator, Repository $cache)
     {
-        $this->field = $field;
+        $this->bytag = $bytag;
         $this->validator = $validator;
         $this->cache = $cache;
     }
 
     protected function query(): Builder
     {
-        return $this->field->newQuery()->orderBy('sort', 'desc');
+        return $this->bytag->newQuery();
     }
 
     /**
      * @param $id
      *
-     * @return Field|Model
+     * @return ByTag|Model
      */
-    public function findOrFail($id): Field
+    public function findOrFail($id): ByTag
     {
-        return $this->field->newQuery()->findOrFail($id);
+        return $this->bytag->newQuery()->findOrFail($id);
     }
 
     /**
-     * @return Collection|Field[]
+     * @return Collection|ByTag[]
      */
     public function all(): Collection
     {
         return $this->query()->get();
     }
 
-    public function store(array $attributes): Field
+    public function store(array $attributes): ByTag
     {
         $this->validator->assertValid($attributes);
 
-        $field = new Field($attributes);
-        $field->save();
+        $bytag = new ByTag($attributes);
+        $bytag->save();
 
-        return $field;
+        return $bytag;
     }
 
-    public function update(Field $field, array $attributes): Field
+    public function update(ByTag $bytag, array $attributes): ByTag
     {
         $this->validator->assertValid($attributes);
 
-        $field->fill($attributes);
-        $field->save();
+        $bytag->fill($attributes);
+        $bytag->save();
 
-        return $field;
+        return $bytag;
     }
 
-    public function delete(Field $field)
+    public function delete(ByTag $bytag)
     {
-        $field->delete();
+        $bytag->delete();
     }
 
     public function sorting(array $sorting)
     {
-        foreach ($sorting as $i => $fieldId) {
-            $this->field->newQuery()->where('id', $fieldId)->update(['sort' => $i]);
+        foreach ($sorting as $i => $bytagId) {
+            $this->bytag->newQuery()->where('id', $bytagId)->update(['sort' => $i]);
         }
     }
 }

@@ -12,24 +12,24 @@
 namespace Xsoft\MasonTag\Api\Controllers;
 
 use Flarum\Api\Controller\AbstractListController;
-use Xsoft\MasonTag\Api\Serializers\FieldSerializer;
-use Xsoft\MasonTag\Repositories\FieldRepository;
+use Xsoft\MasonTag\Api\Serializers\ByTagSerializer;
+use Xsoft\MasonTag\Repositories\ByTagRepository;
 use Xsoft\MasonTag\Validators\OrderValidator;
 use Illuminate\Support\Arr;
 use Psr\Http\Message\ServerRequestInterface;
 use Tobscure\JsonApi\Document;
 
-class FieldOrderController extends AbstractListController
+class ByTagOrderController extends AbstractListController
 {
-    public $serializer = FieldSerializer::class;
+    public $serializer = ByTagSerializer::class;
 
     protected $validator;
-    protected $fields;
+    protected $bytags;
 
-    public function __construct(OrderValidator $validator, FieldRepository $fields)
+    public function __construct(OrderValidator $validator, ByTagRepository $bytags)
     {
         $this->validator = $validator;
-        $this->fields = $fields;
+        $this->bytags = $bytags;
     }
 
     protected function data(ServerRequestInterface $request, Document $document)
@@ -42,9 +42,9 @@ class FieldOrderController extends AbstractListController
 
         $order = Arr::get($attributes, 'sort');
 
-        $this->fields->sorting($order);
+        $this->bytags->sorting($order);
 
         // Return updated sorting values
-        return $this->fields->all();
+        return $this->bytags->all();
     }
 }

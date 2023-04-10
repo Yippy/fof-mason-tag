@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of fof/mason.
+ * This file is part of xsoft/mason-tag.
  *
  * Copyright (c) FriendsOfFlarum.
  *
@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace FoF\Mason;
+namespace Xsoft\MasonTag;
 
 use Flarum\Api\Serializer\ForumSerializer;
 use Flarum\Settings\SettingsRepositoryInterface;
@@ -25,27 +25,28 @@ class ForumAttributes
 
         $actor = $serializer->getActor();
 
-        $canFill = $actor->can('fof-mason.fill-fields');
-        $canSeeSome = $actor->can('fof-mason.see-other-fields') || $actor->can('fof-mason.see-own-fields');
+        $canFill = $actor->can('xsoft-mason-tag.fill-fields');
+        $canSeeSome = $actor->can('xsoft-mason-tag.see-other-fields') || $actor->can('xsoft-mason-tag.see-own-fields');
 
         $attributes = [
             'canFillMasonFields' => $canFill,
         ];
 
         if ($canFill || $canSeeSome) {
-            $attributes['fof-mason.fields-section-title'] = $settings->get('fof-mason.fields-section-title', '');
-            $attributes['fof-mason.column-count'] = (int) $settings->get('fof-mason.column-count', 1);
+            $attributes['xsoft-mason-tag.fields-section-title'] = $settings->get('xsoft-mason-tag.fields-section-title', '');
+            $attributes['xsoft-mason-tag.column-count'] = (int) $settings->get('xsoft-mason-tag.column-count', 1);
         }
 
         if ($canFill) {
-            $attributes['fof-mason.labels-as-placeholders'] = (bool) $settings->get('fof-mason.labels-as-placeholders', false);
-            $attributes['fof-mason.tags-as-fields'] = (bool) $settings->get('fof-mason.tags-as-fields', false);
-            $attributes['fof-mason.tags-field-name'] = $settings->get('fof-mason.tags-field-name', '');
+            $attributes['xsoft-mason-tag.by-tag'] = (bool) $settings->get('xsoft-mason-tag.by-tag', false);
+            $attributes['xsoft-mason-tag.labels-as-placeholders'] = (bool) $settings->get('xsoft-mason-tag.labels-as-placeholders', false);
+            $attributes['xsoft-mason-tag.tags-as-fields'] = (bool) $settings->get('xsoft-mason-tag.tags-as-fields', false);
+            $attributes['xsoft-mason-tag.tags-field-name'] = $settings->get('xsoft-mason-tag.tags-field-name', '');
         }
 
         if ($canSeeSome) {
-            $attributes['fof-mason.fields-in-hero'] = (bool) $settings->get('fof-mason.fields-in-hero', false);
-            $attributes['fof-mason.hide-empty-fields-section'] = (bool) $settings->get('fof-mason.hide-empty-fields-section', false);
+            $attributes['xsoft-mason-tag.fields-in-hero'] = (bool) $settings->get('xsoft-mason-tag.fields-in-hero', false);
+            $attributes['xsoft-mason-tag.hide-empty-fields-section'] = (bool) $settings->get('xsoft-mason-tag.hide-empty-fields-section', false);
         }
 
         return $attributes;

@@ -40,7 +40,7 @@ export default class FieldEdit extends Component {
             return this.field.name();
         }
 
-        return app.translator.trans('fof-mason.admin.buttons.new-field');
+        return app.translator.trans('xsoft-mason-tag.admin.buttons.new-field');
     }
 
     view() {
@@ -55,7 +55,7 @@ export default class FieldEdit extends Component {
                 >
                     <div className="Mason-Box-Header-Title">{this.boxTitle()}</div>
                     <div>
-                        {this.field.exists && app.translator.trans('fof-mason.admin.buttons.edit-field') + ' '}
+                        {this.field.exists && app.translator.trans('xsoft-mason-tag.admin.buttons.edit-field') + ' '}
                         {icon('fas fa-chevron-' + (this.toggleFields ? 'up' : 'down'))}
                     </div>
                 </button>
@@ -68,10 +68,10 @@ export default class FieldEdit extends Component {
         return [
             <div className="Mason-Box--row">
                 <div className="Mason-Box--column">
-                    <h4>{app.translator.trans('fof-mason.admin.titles.field-settings')}</h4>
+                    <h4>{app.translator.trans('xsoft-mason-tag.admin.titles.field-settings')}</h4>
                     <div className="Form-group">
                         <label>
-                            {app.translator.trans('fof-mason.admin.fields.name')}
+                            {app.translator.trans('xsoft-mason-tag.admin.fields.name')}
                             <input
                                 className="FormControl"
                                 value={this.field.name()}
@@ -79,12 +79,12 @@ export default class FieldEdit extends Component {
                                     this.updateAttribute('name', event.target.value);
                                 }}
                             />
-                            <div className="helpText">{app.translator.trans('fof-mason.admin.fields.name-help')}</div>
+                            <div className="helpText">{app.translator.trans('xsoft-mason-tag.admin.fields.name-help')}</div>
                         </label>
                     </div>
                     <div className="Form-group">
                         <label>
-                            {app.translator.trans('fof-mason.admin.fields.description')}
+                            {app.translator.trans('xsoft-mason-tag.admin.fields.description')}
                             <input
                                 className="FormControl"
                                 value={this.field.description()}
@@ -92,7 +92,7 @@ export default class FieldEdit extends Component {
                                     this.updateAttribute('description', event.target.value);
                                 }}
                             />
-                            <div className="helpText">{app.translator.trans('fof-mason.admin.fields.description-help')}</div>
+                            <div className="helpText">{app.translator.trans('xsoft-mason-tag.admin.fields.description-help')}</div>
                         </label>
                     </div>
                     <div className="Form-group">
@@ -102,36 +102,36 @@ export default class FieldEdit extends Component {
                                 state={this.field.min_answers_count() === 1}
                                 onchange={(val) => this.updateAttribute('min_answers_count', val ? 1 : 0)}
                             >
-                                {app.translator.trans('fof-mason.admin.fields.required')}
+                                {app.translator.trans('xsoft-mason-tag.admin.fields.required')}
                             </Switch>
                         </label>
                     </div>
                     <div className="Form-group">
                         <label>
                             <Switch state={this.field.show_when_empty()} onchange={this.updateAttribute.bind(this, 'show_when_empty')}>
-                                {app.translator.trans('fof-mason.admin.fields.show_when_empty')}
+                                {app.translator.trans('xsoft-mason-tag.admin.fields.show_when_empty')}
                             </Switch>
                         </label>
-                        <div className="helpText">{app.translator.trans('fof-mason.admin.fields.show_when_empty-help')}</div>
+                        <div className="helpText">{app.translator.trans('xsoft-mason-tag.admin.fields.show_when_empty-help')}</div>
                     </div>
                     <div className="Form-group">
                         <label>
                             <Switch state={this.field.user_values_allowed()} onchange={this.updateAttribute.bind(this, 'user_values_allowed')}>
-                                {app.translator.trans('fof-mason.admin.fields.user_values_allowed')}
+                                {app.translator.trans('xsoft-mason-tag.admin.fields.user_values_allowed')}
                             </Switch>
                         </label>
-                        <div className="helpText">{app.translator.trans('fof-mason.admin.fields.user_values_allowed-help')}</div>
+                        <div className="helpText">{app.translator.trans('xsoft-mason-tag.admin.fields.user_values_allowed-help')}</div>
                     </div>
                     <div className="Form-group">
                         <label>
-                            {app.translator.trans('fof-mason.admin.fields.validation')}
+                            {app.translator.trans('xsoft-mason-tag.admin.fields.validation')}
                             <input
                                 className="FormControl"
                                 disabled={!this.field.user_values_allowed()}
                                 placeholder={
                                     this.field.user_values_allowed()
                                         ? ''
-                                        : app.translator.trans('fof-mason.admin.fields.enable-user-values-for-validation')
+                                        : app.translator.trans('xsoft-mason-tag.admin.fields.enable-user-values-for-validation')
                                 }
                                 value={this.field.validation()}
                                 oninput={(e) => {
@@ -139,7 +139,7 @@ export default class FieldEdit extends Component {
                                 }}
                             />
                             <div className="helpText">
-                                {app.translator.trans('fof-mason.admin.fields.validation-help', {
+                                {app.translator.trans('xsoft-mason-tag.admin.fields.validation-help', {
                                     a: <a href="https://laravel.com/docs/6.x/validation#available-validation-rules" target="_blank" />,
                                 })}
                             </div>
@@ -147,7 +147,7 @@ export default class FieldEdit extends Component {
                     </div>
                     <div className="Form-group">
                         <label>
-                            {app.translator.trans('fof-mason.admin.fields.icon')} {this.iconPreview(this.field.icon())}
+                            {app.translator.trans('xsoft-mason-tag.admin.fields.icon')} {this.iconPreview(this.field.icon())}
                             <input
                                 className="FormControl"
                                 value={this.field.icon()}
@@ -157,13 +157,13 @@ export default class FieldEdit extends Component {
                             />
                         </label>
                         <div className="helpText">
-                            {app.translator.trans('fof-mason.admin.fields.icon-help', {
+                            {app.translator.trans('xsoft-mason-tag.admin.fields.icon-help', {
                                 a: <a href="https://fontawesome.com/icons?m=free" target="_blank" />,
                             })}
                         </div>
                     </div>
                     <div className="Mason-Box--column">
-                        <h4>{app.translator.trans('fof-mason.admin.titles.field-answers')}</h4>
+                        <h4>{app.translator.trans('xsoft-mason-tag.admin.titles.field-answers')}</h4>
                         <div className="Form-group">
                             <FieldAnswersEdit field={this.field} />
                         </div>
@@ -177,12 +177,12 @@ export default class FieldEdit extends Component {
                     disabled={!this.readyToSave()}
                     onclick={this.saveField.bind(this)}
                 >
-                    {app.translator.trans('fof-mason.admin.buttons.' + (this.field.exists ? 'save' : 'add') + '-field')}
+                    {app.translator.trans('xsoft-mason-tag.admin.buttons.' + (this.field.exists ? 'save' : 'add') + '-field')}
                 </Button>
 
                 {this.field.exists && (
                     <Button className="Button Button--danger" loading={this.processing} onclick={this.deleteField.bind(this)}>
-                        {app.translator.trans('fof-mason.admin.buttons.delete-field')}
+                        {app.translator.trans('xsoft-mason-tag.admin.buttons.delete-field')}
                     </Button>
                 )}
             </div>,
@@ -231,7 +231,7 @@ export default class FieldEdit extends Component {
         if (
             !confirm(
                 extractText(
-                    app.translator.trans('fof-mason.admin.messages.delete-field-confirmation', {
+                    app.translator.trans('xsoft-mason-tag.admin.messages.delete-field-confirmation', {
                         name: this.field.name(),
                     })
                 )
@@ -263,7 +263,7 @@ export default class FieldEdit extends Component {
 
         return [
             ' (',
-            app.translator.trans('fof-mason.admin.fields.icon-preview', {
+            app.translator.trans('xsoft-mason-tag.admin.fields.icon-preview', {
                 preview: icon(value),
             }),
             ')',

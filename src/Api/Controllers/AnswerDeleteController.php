@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of fof/mason.
+ * This file is part of xsoft/mason-tag.
  *
  * Copyright (c) FriendsOfFlarum.
  *
@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace FoF\Mason\Api\Controllers;
+namespace Xsoft\MasonTag\Api\Controllers;
 
 use Flarum\Api\Controller\AbstractDeleteController;
 use Flarum\Http\RequestUtil;
-use FoF\Mason\Repositories\AnswerRepository;
+use Xsoft\MasonTag\Repositories\AnswerRepository;
 use Illuminate\Support\Arr;
 use Psr\Http\Message\ServerRequestInterface;
 

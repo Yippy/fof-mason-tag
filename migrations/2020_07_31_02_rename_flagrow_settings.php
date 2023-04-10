@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of fof/mason.
+ * This file is part of xsoft/mason-tag.
  *
  * Copyright (c) FriendsOfFlarum.
  *
@@ -31,7 +31,7 @@ return [
             $value = $settings->get("flagrow.mason.$key");
 
             if (!is_null($value)) {
-                $settings->set("fof-mason.$key", $value);
+                $settings->set("xsoft-mason-tag.$key", $value);
                 $settings->delete('flagrow.mason.'.$key);
             }
         }

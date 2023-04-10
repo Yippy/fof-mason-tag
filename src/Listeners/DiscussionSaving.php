@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of fof/mason.
+ * This file is part of xsoft/mason-tag.
  *
  * Copyright (c) FriendsOfFlarum.
  *
@@ -9,29 +9,32 @@
  * file that was distributed with this source code.
  */
 
-namespace FoF\Mason\Listeners;
+namespace Xsoft\MasonTag\Listeners;
 
 use Flarum\Discussion\Event\Saving;
 use Flarum\Foundation\ValidationException;
 use Flarum\User\Exception\PermissionDeniedException;
-use FoF\Mason\Field;
-use FoF\Mason\Repositories\AnswerRepository;
-use FoF\Mason\Repositories\FieldRepository;
-use FoF\Mason\Validators\UserAnswerValidator;
 use Illuminate\Contracts\Validation\Factory;
 use Illuminate\Support\Arr;
+use Xsoft\MasonTag\Repositories\ByTagRepository;
+use Xsoft\MasonTag\Field;
+use Xsoft\MasonTag\Repositories\AnswerRepository;
+use Xsoft\MasonTag\Repositories\FieldRepository;
+use Xsoft\MasonTag\Validators\UserAnswerValidator;
 
 class DiscussionSaving
 {
     private $validation;
     private $fields;
     private $answers;
+    private $bytags;
 
-    public function __construct(Factory $validation, FieldRepository $fields, AnswerRepository $answers)
+    public function __construct(Factory $validation, FieldRepository $fields, AnswerRepository $answers, ByTagRepository $bytags)
     {
         $this->validation = $validation;
         $this->fields = $fields;
         $this->answers = $answers;
+        $this->bytags = $bytags;
     }
 
     /**
@@ -79,6 +82,8 @@ class DiscussionSaving
         $answersPerField = [];
 
         $answerRelations = Arr::get($event->data, 'relationships.masonAnswers.data', []);
+        $currentTag =  Arr::get($event->data, 'relationships.tags.data', []);
+        $tagid = $currentTag[0]['id'];
 
         foreach ($answerRelations as $answerRelation) {
             $answer = null;
@@ -117,16 +122,37 @@ class DiscussionSaving
             $answersPerField[$answer->field->id] = Arr::get($answersPerField, $answer->field->id, 0) + 1;
         }
 
-        $this->fields->all()->each(function ($field) use ($event, $answersPerField) {
-            // If the actor can skip fields, no need to check their number
-            if ($event->actor->can('skipField', $field)) {
-                return;
-            }
+        $attachedFields = [];
+        $fieldsBytag = [];
+        // now build an array of all fields turned on attached to that Tag
 
+        foreach ( $this->bytags->all() as $bytag ) {
+            if( $bytag['tag_id'] == $tagid && $bytag['switch'] == true ) {
+                // if a Tag's matching fields are enabled, add to a list
+                $attachedFields[] = $bytag['field_name'];
+            }
+        }
+
+        // form a list of full-size field objects based on this list
+        foreach ($this->fields->all() as $field) { 
+            if (in_array($field['name'] , $attachedFields)) {
+
+                $fieldsBytag[] = $field;
+            }
+        }
+
+        foreach ($fieldsBytag as $field) {
+        // $this->fields->all()->each(function ($field) use ($event, $answersPerField) {
+            // If the actor can skip fields, no need to check their number
+            // if ($event->actor->can('skipField', $field)) {
+            //     return;
+            // }
+
+            // if the field ID doesn't match the ids from $answersPerField, don't validate it
             $count = Arr::get($answersPerField, $field->id, 0);
 
             $this->validateAnswerCount($field, $count);
-        });
+        }
 
         $event->discussion->afterSave(function ($discussion) use ($newAnswerIds) {
             $discussion->masonAnswers()->sync($newAnswerIds);

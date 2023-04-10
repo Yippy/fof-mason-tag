@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of fof/mason.
+ * This file is part of xsoft/mason-tag.
  *
  * Copyright (c) FriendsOfFlarum.
  *
@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace FoF\Mason\Access;
+namespace Xsoft\MasonTag\Access;
 
 use Flarum\User\Access\AbstractPolicy;
 use Flarum\User\User;
-use FoF\Mason\Field;
+use Xsoft\MasonTag\Field;
 
 class FieldPolicy extends AbstractPolicy
 {
@@ -42,7 +42,7 @@ class FieldPolicy extends AbstractPolicy
      */
     public function skipField(User $user, Field $field)
     {
-        if ($field->min_answers_count === 0 || $user->can('fof-mason.skip-required-fields')) {
+        if ($field->min_answers_count === 0 || $user->can('xsoft-mason-tag.skip-required-fields')) {
             return $this->allow();
         }
     }

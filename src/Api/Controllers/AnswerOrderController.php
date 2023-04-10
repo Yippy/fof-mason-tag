@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of fof/mason.
+ * This file is part of xsoft/mason-tag.
  *
  * Copyright (c) FriendsOfFlarum.
  *
@@ -9,14 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace FoF\Mason\Api\Controllers;
+namespace Xsoft\MasonTag\Api\Controllers;
 
 use Flarum\Api\Controller\AbstractShowController;
 use Flarum\Http\RequestUtil;
-use FoF\Mason\Api\Serializers\FieldSerializer;
-use FoF\Mason\Repositories\AnswerRepository;
-use FoF\Mason\Repositories\FieldRepository;
-use FoF\Mason\Validators\OrderValidator;
+use Xsoft\MasonTag\Api\Serializers\FieldSerializer;
+use Xsoft\MasonTag\Repositories\AnswerRepository;
+use Xsoft\MasonTag\Repositories\FieldRepository;
+use Xsoft\MasonTag\Validators\OrderValidator;
 use Illuminate\Support\Arr;
 use Psr\Http\Message\ServerRequestInterface;
 use Tobscure\JsonApi\Document;

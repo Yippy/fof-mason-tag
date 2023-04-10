@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of fof/mason.
+ * This file is part of xsoft/mason-tag.
  *
  * Copyright (c) FriendsOfFlarum.
  *
@@ -9,11 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace FoF\Mason;
+namespace Xsoft\MasonTag;
 
 use Carbon\Carbon;
 use Flarum\Database\AbstractModel;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Xsoft\MasonTag\Answer;
+use Xsoft\MasonTag\ByTag;
 
 /**
  * @property int                                               $id
@@ -76,5 +78,13 @@ class Field extends AbstractModel
     public function answers()
     {
         return $this->hasMany(Answer::class);
+    }
+    
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function bytag()
+    {
+        return $this->belongsToMany(ByTag::class);
     }
 }

@@ -22,7 +22,7 @@ export default class FieldEdit extends Component {
                 <span
                     onclick={() => {
                         const newContent = prompt(
-                            extractText(app.translator.trans('fof-mason.admin.buttons.edit-answer-prompt')),
+                            extractText(app.translator.trans('xsoft-mason-tag.admin.buttons.edit-answer-prompt')),
                             this.answer.content()
                         );
 
@@ -30,7 +30,7 @@ export default class FieldEdit extends Component {
                             this.updateAttribute('content', newContent);
                         }
                     }}
-                    title={extractText(app.translator.trans('fof-mason.admin.buttons.edit-answer'))}
+                    title={extractText(app.translator.trans('xsoft-mason-tag.admin.buttons.edit-answer'))}
                 >
                     {this.answer.content()} {icon('fas fa-pen')}
                 </span>
@@ -44,7 +44,7 @@ export default class FieldEdit extends Component {
                         this.saveAnswer();
                     }}
                 >
-                    {app.translator.trans('fof-mason.admin.fields.is_suggested')}
+                    {app.translator.trans('xsoft-mason-tag.admin.fields.is_suggested')}
                 </Switch>
                 <div className="ButtonGroup">
                     <Button
@@ -53,10 +53,10 @@ export default class FieldEdit extends Component {
                         disabled={!this.readyToSave()}
                         onclick={this.saveAnswer.bind(this)}
                     >
-                        {app.translator.trans('fof-mason.admin.buttons.save-answer')}
+                        {app.translator.trans('xsoft-mason-tag.admin.buttons.save-answer')}
                     </Button>
                     <Button className="Button Button--danger" loading={this.processing} onclick={this.deleteAnswer.bind(this)}>
-                        {app.translator.trans('fof-mason.admin.buttons.delete-answer')}
+                        {app.translator.trans('xsoft-mason-tag.admin.buttons.delete-answer')}
                     </Button>
                 </div>
             </div>
@@ -97,7 +97,7 @@ export default class FieldEdit extends Component {
         if (
             !confirm(
                 extractText(
-                    app.translator.trans('fof-mason.admin.messages.delete-answer-confirmation', {
+                    app.translator.trans('xsoft-mason-tag.admin.messages.delete-answer-confirmation', {
                         content: this.answer.content(),
                     })
                 )

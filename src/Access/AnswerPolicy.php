@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of fof/mason.
+ * This file is part of xsoft/mason-tag.
  *
  * Copyright (c) FriendsOfFlarum.
  *
@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace FoF\Mason\Access;
+namespace Xsoft\MasonTag\Access;
 
 use Flarum\User\Access\AbstractPolicy;
 use Flarum\User\User;
-use FoF\Mason\Answer;
+use Xsoft\MasonTag\Answer;
 
 class AnswerPolicy extends AbstractPolicy
 {

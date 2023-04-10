@@ -1,6 +1,6 @@
 # Mason by FriendsOfFlarum
 
-![License](https://img.shields.io/badge/license-MIT-blue.svg) [![Latest Stable Version](https://img.shields.io/packagist/v/fof/mason.svg)](https://packagist.org/packages/fof/mason)
+![License](https://img.shields.io/badge/license-MIT-blue.svg) [![Latest Stable Version](https://img.shields.io/packagist/v/xsoft-ict/mason-tag.svg)](https://packagist.org/packages/xsoft-ict/mason-tag)
 
 Add custom fields to your discussions. Features:
 
@@ -16,13 +16,13 @@ Add custom fields to your discussions. Features:
 ## Installation
 
 ```bash
-composer require fof/mason
+composer require xsoft-ict/mason-tag
 ```
 
 ## Updating
 
 ```bash
-composer require fof/mason
+composer require xsoft-ict/mason-tag
 php flarum migrate
 php flarum cache:clear
 ```
@@ -72,7 +72,7 @@ Then upgrade from the old extension to the new one:
 
 ```sh
 composer remove flagrow/mason
-composer require fof/mason
+composer require xsoft-ict/mason-tag
 ```
 
 When you enable the new extension, the permissions, settings and the data from Flagrow Mason will be moved to FoF Mason.
@@ -82,6 +82,6 @@ When you enable the new extension, the permissions, settings and the data from F
 - [Flarum Discuss post](https://discuss.flarum.org/d/7028)
 - [Source code on GitHub](https://github.com/FriendsOfFlarum/mason)
 - [Report an issue](https://github.com/FriendsOfFlarum/mason/issues)
-- [Download via Packagist](https://packagist.org/packages/fof/mason)
+- [Download via Packagist](https://packagist.org/packages/xsoft-ict/mason-tag)
 
 An extension by [FriendsOfFlarum](https://github.com/FriendsOfFlarum)

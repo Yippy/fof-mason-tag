@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of fof/mason.
+ * This file is part of xsoft/mason-tag.
  *
  * Copyright (c) FriendsOfFlarum.
  *
@@ -24,7 +24,7 @@ return [
         ] as $permission) {
             Permission::query()
                 ->where('permission', "flagrow.mason.$permission")
-                ->update(['permission' => "fof-mason.$permission"]);
+                ->update(['permission' => "xsoft-mason-tag.$permission"]);
         }
     },
     'down' => function (Builder $schema) {
