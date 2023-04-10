@@ -9,17 +9,23 @@ export default class FieldEditText extends Component {
         this.field = this.attrs.field;
         this.answers = this.attrs.answers;
         this.onchange = this.attrs.onchange;
+        this.inputId = 'FormControl mason-input-' + this.attrs.inputId;
 
         this.content = '';
+        var answersForThisField = [];
 
-        const answersForThisField = this.answers.filter((answer) => {
-            // Temporary store entries seem to turn into undefined after saving
-            if (typeof answer === 'undefined') {
-                return false;
-            }
+        if (typeof this.answers === 'undefined') {
+            answersForThisField = false;
+        } else {
+            answersForThisField = this.answers.filter((answer) => {
+                // Temporary store entries seem to turn into undefined after saving
+                if (typeof answer === 'undefined') {
+                    return false;
+                }
 
-            return answer.field().id() === this.field.id();
-        });
+                return answer.field().id() === this.field.id();
+            });
+        }
 
         if (answersForThisField.length) {
             // For now we only support a single custom answer
@@ -33,6 +39,7 @@ export default class FieldEditText extends Component {
                 className="FormControl"
                 required={this.field.required()}
                 value={this.content}
+                class={this.inputId}
                 oninput={(e) => {
                     this.content = e.target.value;
 
@@ -59,7 +66,7 @@ export default class FieldEditText extends Component {
     }
 
     fieldPlaceholder() {
-        if (app.forum.attribute('fof-mason.labels-as-placeholders')) {
+        if (app.forum.attribute('xsoft-mason-tag.labels-as-placeholders')) {
             return this.field.name() + (this.field.required() ? ' *' : '');
         }
 

@@ -12,7 +12,7 @@ function showFieldsOnPost(post) {
 
     // We only add fields to the first post, and only if fields are not displayed in the hero
     // TODO: what if the first post is deleted ?
-    return post.number() === 1 && !app.forum.attribute('fof-mason.fields-in-hero');
+    return post.number() === 1 && !app.forum.attribute('xsoft-mason-tag.fields-in-hero');
 }
 
 export default function () {

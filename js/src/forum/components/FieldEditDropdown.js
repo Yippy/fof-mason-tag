@@ -1,4 +1,5 @@
 import app from 'flarum/forum/app';
+import Model from 'flarum/common/Model';
 import icon from 'flarum/common/helpers/icon';
 import Component from 'flarum/common/Component';
 import sortByAttribute from '@common/helpers/sortByAttribute';
@@ -25,6 +26,12 @@ export default class FieldEditDropdown extends Component {
             }
         });
 
+        let relationshipInfo = {
+            field: {
+                data: Model.getIdentifier(this.field),
+            },
+        };
+
         return (
             <span className="Select">
                 <select
@@ -39,7 +46,13 @@ export default class FieldEditDropdown extends Component {
 
                                 // This will only work with suggested answers for now
                                 // As they are the only ones registered in the store
-                                answers.push(app.store.getById('mason-answers', answerId));
+                                // answers.push(app.store.getById('mason-answers', answerId));
+
+                                // need to add field relationship in order to avoid JS error on
+                                // the text entry side
+                                let storeObj = app.store.getById('mason-answers', answerId);
+                                storeObj.data.relationships = relationshipInfo;
+                                answers.push(storeObj);
                             }
                         }
 
@@ -70,7 +83,7 @@ export default class FieldEditDropdown extends Component {
     placeholderHidden(field) {
         // If labels are hidden, we need to always show the default value (even if it can't be selected)
         // Otherwise when the field is "required" you can't find the name of the field anymore once something is selected
-        if (app.forum.attribute('fof-mason.labels-as-placeholders')) {
+        if (app.forum.attribute('xsoft-mason-tag.labels-as-placeholders')) {
             return false;
         }
 
@@ -80,7 +93,7 @@ export default class FieldEditDropdown extends Component {
     selectPlaceholder(field) {
         let text = '';
 
-        if (app.forum.attribute('fof-mason.labels-as-placeholders')) {
+        if (app.forum.attribute('xsoft-mason-tag.labels-as-placeholders')) {
             text += field.name();
 
             if (field.required()) {
@@ -91,9 +104,9 @@ export default class FieldEditDropdown extends Component {
         }
 
         if (field.required()) {
-            text += app.translator.trans('fof-mason.forum.answers.choose-option');
+            text += app.translator.trans('xsoft-mason-tag.forum.answers.choose-option');
         } else {
-            text += app.translator.trans('fof-mason.forum.answers.no-option-selected');
+            text += app.translator.trans('xsoft-mason-tag.forum.answers.no-option-selected');
         }
 
         return text;

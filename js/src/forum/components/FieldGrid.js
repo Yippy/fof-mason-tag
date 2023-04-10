@@ -7,11 +7,9 @@ export default class FieldGrid extends Component {
         return (
             <div className="Mason-Grid-Wrapper">
                 <div className="Mason-Grid">
-                    {chunkArray(this.attrs.items, app.forum.attribute('fof-mason.column-count')).map((row) => (
-                        <div className="Mason-Row">
-                            {row.map((item) => (
-                                <div className="Mason-Column" {...item} />
-                            ))}
+                    {chunkArray(this.attrs.items, app.forum.attribute('xsoft-mason-tag.column-count')).map((row) => (
+                        <div className="Mason-Row Form-group">
+                            {row.map((item) => (item))}
                         </div>
                     ))}
                 </div>

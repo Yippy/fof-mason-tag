@@ -8,6 +8,6 @@ export default class Answer extends Model {
     field = Model.hasOne<Field>('field');
 
     apiEndpoint() {
-        return '/fof/mason/answers' + (this.exists ? '/' + this.data.id : '');
+        return '/xsoft/mason-tag/answers' + (this.exists ? '/' + this.data.id : '');
     }
 }

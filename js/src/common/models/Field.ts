@@ -19,6 +19,6 @@ export default class Field extends Model {
     multiple = computed<boolean>('max_answers_count', (max_answers_count) => max_answers_count > 1);
 
     apiEndpoint() {
-        return '/fof/mason/fields' + (this.exists ? '/' + this.data.id : '');
+        return '/xsoft/mason-tag/fields' + (this.exists ? '/' + this.data.id : '');
     }
 }

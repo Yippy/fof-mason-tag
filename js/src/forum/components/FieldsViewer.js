@@ -22,7 +22,7 @@ export default class FieldsViewer extends Component {
         // If all fields are hidden
         // And either no controls are shown or the setting hides them
         // We don't show the viewer
-        if (!fields.length && (!head.length || app.forum.attribute('fof-mason.hide-empty-fields-section'))) {
+        if (!fields.length && (!head.length || app.forum.attribute('xsoft-mason-tag.hide-empty-fields-section'))) {
             // We need to return an actual dom element or Flarum does not like it
             return <div />;
         }
@@ -50,13 +50,13 @@ export default class FieldsViewer extends Component {
                         })
                     }
                 >
-                    {app.translator.trans('fof-mason.forum.discussion-controls.edit-answers')}
+                    {app.translator.trans('xsoft-mason-tag.forum.discussion-controls.edit-answers')}
                 </Button>
             );
         }
 
-        if (app.forum.attribute('fof-mason.fields-section-title')) {
-            items.add('title', <h5 className="Mason-Field--title">{app.forum.attribute('fof-mason.fields-section-title')}</h5>);
+        if (app.forum.attribute('xsoft-mason-tag.fields-section-title')) {
+            items.add('title', <h5 className="Mason-Field--title">{app.forum.attribute('xsoft-mason-tag.fields-section-title')}</h5>);
         }
 
         return items;
@@ -79,7 +79,7 @@ export default class FieldsViewer extends Component {
 
             if (answers.length === 0) {
                 if (field.show_when_empty()) {
-                    answer_list.push(<em className="Mason-Inline-Answer">{app.translator.trans('fof-mason.forum.post-answers.no-answer')}</em>);
+                    answer_list.push(<em className="Mason-Inline-Answer">{app.translator.trans('xsoft-mason-tag.forum.post-answers.no-answer')}</em>);
                 } else {
                     // If the field has no answer and the setting is off we don't show it
                     return;

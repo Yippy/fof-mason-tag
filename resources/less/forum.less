@@ -9,13 +9,36 @@
 }
 
 .Mason-Fields {
-    border: 1px solid #e8ecf3;
-    border-radius: @border-radius;
-    padding: 12px 16px;
+    // border: 1px solid #e8ecf3;
+    // border-radius: @border-radius;
+    // padding: 12px 16px;
+
+    border: 1px solid #dbdbdb;
+    border-radius: 8px;
+    padding: .5rem;
+    background: #fafafa;
 
     .helpText {
         margin-bottom: 0;
     }
+}
+
+.Mason-Discussion {
+    padding: .75rem 0;
+}
+
+.Mason-Discussion label {
+    color: #999;
+}
+
+.DiscussionHero-items .Mason-item label, .DiscussionHero-items .Mason-Answers {
+    color: #fff;
+}
+
+.Mason-Answers { 
+    display: inline;
+    color: #444;
+    font-weight: bold;
 }
 
 .Mason-Fields--viewer {
@@ -59,6 +82,14 @@
     margin-bottom: 24px;
 }
 
+.Mason-Grid .helpText {
+    // padding: .25rem 0 .5rem .75rem;
+    margin: 0;
+    position: relative;
+    top: .25rem;
+    left: .75rem;
+}
+
 .Mason-Row:last-of-type .Mason-Column:last-of-type {
     // Do not apply the .Form-group -like margin for the last item
     margin-bottom: 0;
@@ -66,7 +97,7 @@
 
 @media (min-width: @screen-desktop) {
     .Mason-Grid {
-        display: table;
+        display: grid;
         width: 100%;
     }
 
@@ -82,5 +113,39 @@
     .Mason-Row:last-of-type .Mason-Column {
         // Do not apply the .Form-group -like margin for the items of the last row
         margin-bottom: 0;
+    }
+
+    .masoncol1 {
+        grid-template-columns: 100%;
+    }
+
+    .masoncol2 {
+        // grid-template-columns: repeat(2, 48%);
+        grid-template-columns: 1fr 1fr;
+        grid-column-gap: .75rem;
+    }
+
+    .masoncol3 {
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-column-gap: .75rem;
+    }
+
+    .Mason-Grid input, .Mason-Grid .FormControl {
+        background-color: #e4e4e4;
+        color: #444;
+    }
+
+
+    .Mason-Grid .FormControl:focus, .Mason-Grid .FormControl.focus {
+        background-color: #fafafa;
+        color: #111;
+    }
+
+    .Mason-Grid select, span.Select {
+        width: 100%;
+    }
+
+    .Mason-Grid .Form-group {
+        margin-bottom: .75rem;
     }
 }

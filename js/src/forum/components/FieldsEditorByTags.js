@@ -10,7 +10,7 @@ import FieldEditText from './FieldEditText';
 import FieldEditTags from './FieldEditTags';
 import FieldGrid from './FieldGrid';
 
-export default class FieldsEditor extends Component {
+export default class FieldsEditorByTags extends Component {
     oninit(vnode) {
         super.oninit(vnode);
 
@@ -70,28 +70,31 @@ export default class FieldsEditor extends Component {
         if (app.forum.attribute('xsoft-mason-tag.fields-section-title')) {
             items.add('title', <h5 className="Mason-Field--title">{app.forum.attribute('xsoft-mason-tag.fields-section-title')}</h5>);
         }
-
         return items;
     }
 
     fieldItems() {
         const items = new ItemList();
 
-        if (app.forum.attribute('xsoft-mason-tag.tags-as-fields')) {
-            items.add(
-                'tags',
-                <FieldEditTags
-                    discussion={this.attrs.discussion}
-                    onchange={(tags) => {
-                        this.attrs.ontagchange && this.attrs.ontagchange(tags);
-                    }}
-                />
-            );
-        }
+        // taking this feature off beacuse changing tags will affect which fields show up
+
+        // if (app.forum.attribute('xsoft-mason-tag.tags-as-fields')) {
+        //     items.add(
+        //         'tags',
+        //         <FieldEditTags
+        //             discussion={this.attrs.discussion}
+        //             onchange={(tags) => {
+        //                 this.attrs.ontagchange && this.attrs.ontagchange(tags);
+        //             }}
+        //         />
+        //     );
+        // }
 
         this.fields.forEach((field) => {
             const inputAttrs = {
                 field,
+                bytags: this.attrs.bytags,
+                inputId: field.data.id,
                 answers: this.attrs.answers,
                 onchange: (fieldAnswers) => {
                     // Every input component calls "onchange" with a list of answers from the store
@@ -106,22 +109,27 @@ export default class FieldsEditor extends Component {
                 input = <FieldEditDropdown {...inputAttrs} />;
             }
 
-            items.add(
-                `field-${field.id()}`,
-                <div
-                    class={classList('Mason-Field Form-group', {
-                        ['Mason-Field--label-as-placeholder']: app.forum.attribute('xsoft-mason-tag.labels-as-placeholders'),
-                    })}
-                >
-                    <label>
-                        {field.icon() ? <>{icon(field.icon())} </> : null}
-                        {field.name()}
-                        {field.required() ? ' *' : null}
-                    </label>
-                    {input}
-                    {field.description() ? <div className="helpText">{field.description()}</div> : null}
-                </div>
-            );
+            this.attrs.bytags.forEach((tag) => {
+                // filter the items list for fields we actually need
+                if (tag == field.data.attributes.name) {
+                    items.add(
+                        `field-${field.id()}`,
+                        <div
+                            class={classList('Mason-Field Form-group', {
+                                ['Mason-Field--label-as-placeholder']: app.forum.attribute('xsoft-mason-tag.labels-as-placeholders'),
+                            })}
+                        >
+                            <label>
+                                {field.icon() ? <>{icon(field.icon())} </> : null}
+                                {field.name()}
+                                {field.required() ? ' *' : null}
+                            </label>
+                            {input}
+                            {field.description() ? <div className="helpText">{field.description()}</div> : null}
+                        </div>
+                    );
+                }
+            });
         });
 
         return items;
