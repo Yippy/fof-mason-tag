@@ -10,6 +10,7 @@ Add custom fields to your discussions. Features:
 - User answers can be validated with custom Laravel Validator rules
 - You can choose the number of columns of the layout
 - (experimental) show the tags field as a Mason field
+- Associate field with primary tag, on/off field for each tag
 
 **Note:** due to the way the Flarum discussion composer works, it currently cannot be automatically resized to fit all fields. If you have many fields you will have to manually increase the composer height with the mouse handle.
 
@@ -75,13 +76,13 @@ composer remove flagrow/mason
 composer require xsoft-ict/mason-tag
 ```
 
-When you enable the new extension, the permissions, settings and the data from Flagrow Mason will be moved to FoF Mason.
+When you enable the new extension, the permissions, settings and the data from Flagrow Mason will be moved to FoF Mason Tag.
 
 ## Links
 
 - [Flarum Discuss post](https://discuss.flarum.org/d/7028)
-- [Source code on GitHub](https://github.com/FriendsOfFlarum/mason)
-- [Report an issue](https://github.com/FriendsOfFlarum/mason/issues)
+- [Source code on GitHub](https://github.com/xsoft-ict/fof-mason-tag)
+- [Report an issue](https://github.com/xsoft-ict/fof-mason-tag/issues)
 - [Download via Packagist](https://packagist.org/packages/xsoft-ict/mason-tag)
 
-An extension by [FriendsOfFlarum](https://github.com/FriendsOfFlarum)
+An extension by [XSoft](https://xsoft.asia)
