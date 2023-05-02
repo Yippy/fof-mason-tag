@@ -25,7 +25,7 @@
     "support": {
         "issues": "https://github.com/xsoft-ict/fof-mason-tag/issues",
         "source": "https://github.com/xsoft-ict/fof-mason-tag",
-        "forum": "https://discuss.flarum.org/d/7028"
+        "forum": "https://discuss.flarum.org/d/32715-mason-tag-extension"
     },
     "require": {
         "flarum/core": "^1.2"
@@ -45,7 +45,7 @@
             }
         },
         "flagrow": {
-            "discuss": "https://discuss.flarum.org/d/7028"
+            "discuss": "https://discuss.flarum.org/d/32715-mason-tag-extension"
         }
     },
     "autoload": {

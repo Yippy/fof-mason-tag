@@ -80,7 +80,7 @@ When you enable the new extension, the permissions, settings and the data from F
 
 ## Links
 
-- [Flarum Discuss post](https://discuss.flarum.org/d/7028)
+- [Flarum Discuss post](https://discuss.flarum.org/d/32715-mason-tag-extension)
 - [Source code on GitHub](https://github.com/xsoft-ict/fof-mason-tag)
 - [Report an issue](https://github.com/xsoft-ict/fof-mason-tag/issues)
 - [Download via Packagist](https://packagist.org/packages/xsoft-ict/mason-tag)
