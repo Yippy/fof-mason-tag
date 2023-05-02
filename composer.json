@@ -31,7 +31,8 @@
         "flarum/core": "^1.2"
     },
     "replace": {
-        "flagrow/mason": "*"
+        "flagrow/mason": "*",
+        "fof/mason": "*"
     },
     "extra": {
         "flarum-extension": {

@@ -30,22 +30,13 @@ export default class TagFields extends Component {
     }
 
     initRows() {
-        // result is from the API call, switch to that if nec;
-        let tempStorage = app.store.all('mason-bytags');
-        const fields = app.store.all('mason-fields');
+        const fields = sortByAttribute(app.store.all('mason-fields'));
+        const bytags = app.store.all('mason-bytags').filter(bytag => bytag.data.attributes.tag_name == this.tag)
 
-        // match each Tag with the rows in the database that contain its fields
-        this.matchingTags = tempStorage.filter((match) => match.data.attributes.tag_name == this.tag);
-        // sort alphabetically
-        this.matchingTags.sort(function (x, y) {
-            let a = x.data.attributes.field_name,
-                b = y.data.attributes.field_name;
-            return a == b ? 0 : a > b ? 1 : -1;
-        });
-
-        // if a Tag has just been created, make its rows in the database
-        if (this.matchingTags == false) {
-            sortByAttribute(fields).map((field, i) => {
+        // if a Tag or Field has just been created, make its rows in the database
+        fields.map((field) => {
+            const existed = bytags.find(bytag => bytag.data.attributes.field_name == field.data.attributes.name);
+            if (!existed) {
                 let rec = app.store.createRecord('mason-bytags', {
                     attributes: {
                         tag_name: this.tag,
@@ -54,13 +45,26 @@ export default class TagFields extends Component {
                         switch: false,
                     },
                 });
-                this.matchingTags.push(rec);
-                this.makeRow(rec.data.attributes, i);
-            });
-        }
+                this.makeRow(rec.data.attributes);
+            }
+        });
+
+        // if a field has been deleted, remove it in the database
+        bytags.filter(bytag => !fields.find(field => field.data.attributes.name === bytag.data.attributes.field_name)).map(bytag => {
+            this.deleteRow(bytag)
+        })
+
+        this.matchingTags = bytags
+        // sort alphabetically
+        this.matchingTags.sort(function (x, y) {
+            let a = x.data.attributes.field_name,
+                b = y.data.attributes.field_name;
+            return a == b ? 0 : a > b ? 1 : -1;
+        });
+        m.redraw();
     }
 
-    makeRow(attributes, count) {
+    makeRow(attributes) {
         app.request({
             method: 'POST',
             url: app.forum.attribute('apiUrl') + '/xsoft/mason-tag/bytag',
@@ -71,7 +75,6 @@ export default class TagFields extends Component {
             },
         }).then((result) => {
             app.store.pushPayload(result);
-            // this.reInit(count);
             return;
         });
     }
@@ -90,6 +93,15 @@ export default class TagFields extends Component {
         }).then((result) => {
             app.store.pushPayload(result);
             m.redraw();
+        });
+    }
+
+    deleteRow(bytag) {
+        app.request({
+            method: 'DELETE',
+            url: app.forum.attribute('apiUrl') + '/xsoft/mason-tag/bytag/' + bytag.data.id,
+        }).then((result) => {
+            app.store.remove(bytag);
         });
     }
 
